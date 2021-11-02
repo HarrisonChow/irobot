@@ -1,14 +1,3 @@
-// const readline = require('readline').createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// })
-
-// readline.question(`Place your robot`, (xPosition, yPosition, direction) => {
-//     // console.log(`Hi ${name}!`)
-
-//     readline.close()
-// })
-
 
 module.exports = class IRobot {
     constructor(xPosition, yPosition, direction) {
@@ -53,25 +42,6 @@ module.exports = class IRobot {
         return;
     }
 
-    nextStep() {
-        var x, y;
-        switch (this.direction) {
-            case "NORTH":
-                y = this.yPosition + 1;
-                break;
-            case "EAST":
-                x = this.xPosition + 1;
-                break;
-            case "WEST":
-                x = this.xPosition - 1;
-                break;
-            case "SOUTH":
-                y = this.yPosition - 1;
-                break;
-        }
-        return [x, y];
-    }
-
     move() {
         switch (this.direction) {
             case "EAST":
@@ -87,5 +57,24 @@ module.exports = class IRobot {
                 this.yPosition > 0 ? this.yPosition = this.yPosition - 1 : this.yPosition;
                 break;
         }
+    }
+
+    status() {
+        return `${this.xPosition}, ${this.yPosition}, ${this.direction}`;
+    }
+
+    place(x, y, direction) {
+
+        if (x < 0 || x > 5 || y < 0 || y > 5) {
+            throw new Error("Invalid Position! Please input number between 0 - 5");
+        }
+
+        if (direction != "NORTH" && direction != "EAST" && direction != "SOUTH" && direction != "WEST") {
+            throw new Error("Invalid direction! Please input 'EAST','WEST','NORTH' or 'SOUTH'");
+        }
+
+        this.xPosition = x;
+        this.yPosition = y;
+        this.direction = direction;
     }
 }

@@ -1,6 +1,7 @@
 const { expect } = require('@jest/globals');
 const { it } = require('jest-circus');
 const { ContextConsumer } = require('react-is');
+const IRobot = require('./irobot.js');
 const iRobot = require('./irobot.js');
 
 describe('left()', () => {
@@ -196,8 +197,8 @@ describe('move()', () => {
     });
     describe('When on the edge of the SOUTH', () => {
       [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [0, 0]].forEach((position) => {
-        describe(`When position is position[0] , 0`, () => {
-          test(`new position should be position[0] , 0`, () => {
+        describe(`When position is ${position[0]} , 0`, () => {
+          test(`new position should be ${position[0]} , 0`, () => {
             const aIRobot = new iRobot(position[0], 0, 'SOUTH');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0]);
@@ -206,6 +207,89 @@ describe('move()', () => {
           });
         })
       });
+    });
+  });
+});
+
+describe('status()', () => {
+  [[1, 1, 'NORTH'], [0, 0, 'SOUTH'], [1, 5, "EAST"], [3, 4, "WEST"]].forEach((status) => {
+    const x = status[0];
+    const y = status[1];
+    const direction = status[2];
+
+    describe(`When status is ${x} , ${y}, ${direction}`, () => {
+      test(`should report the correct status of the robot`, () => {
+        const aIRobot = new iRobot(x, y, direction);
+        expect(aIRobot.status()).toEqual(`${x}, ${y}, ${direction}`);
+      });
+    });
+  });
+});
+
+describe('place()', () => {
+  describe('When place the robot within the grid', () => {
+    [[1, 1, 'NORTH'], [0, 0, 'SOUTH'], [1, 5, "EAST"], [3, 4, "WEST"]].forEach((place) => {
+      const x = place[0];
+      const y = place[1];
+      const direction = place[2];
+
+      describe(`on ${x} , ${y}, ${direction}`, () => {
+        test(`should place the robot on the right position`, () => {
+          const aIRobot = new iRobot(0, 0, 'EAST');
+
+          aIRobot.place(x, y, direction);
+
+          expect(aIRobot.xPosition).toEqual(x);
+          expect(aIRobot.yPosition).toEqual(y);
+          expect(aIRobot.direction).toEqual(direction);
+        });
+      });
+    });
+  })
+
+  describe('When place the robot outside of the grid', () => {
+    let aIRobot;
+
+    beforeEach(() => {
+      aIRobot = new iRobot(1, 2, 'NORTH');
+    });
+
+    test('should not change the position of the robot', () => {
+      try {
+        aIRobot.place(1, 6, 'WEST');
+      }
+      catch (error) { }
+
+      expect(aIRobot.xPosition).toEqual(1);
+      expect(aIRobot.yPosition).toEqual(2);
+      expect(aIRobot.direction).toEqual('NORTH');
+    });
+
+    test('should throw an error', () => {
+      expect(() => aIRobot.place(8, 2, 'EAST')).toThrow("Invalid Position! Please input number between 0 - 5");
+    });
+  });
+
+  describe('When face the robot to an invalid direction', () => {
+    let aIRobot;
+
+    beforeEach(() => {
+      aIRobot = new iRobot(1, 2, 'NORTH');
+    });
+
+    test('should not change the direction of the robot', () => {
+      try {
+        aIRobot.place(2, 3, 'ABC');
+      }
+      catch (error) { }
+
+      expect(aIRobot.xPosition).toEqual(1);
+      expect(aIRobot.yPosition).toEqual(2);
+      expect(aIRobot.direction).toEqual('NORTH');
+    });
+
+    test('should throw an error', () => {
+      expect(() => aIRobot.place(1, 2, 'ABC')).toThrow("Invalid direction! Please input 'EAST','WEST','NORTH' or 'SOUTH'");
     });
   });
 });
