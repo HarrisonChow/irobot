@@ -17,6 +17,10 @@ npm install
 npm run test
 ```
 
+## Bonus
+I also quickly created another visualised version using React. Have fun!
+https://github.com/HarrisonChow/toy-robot
+
 ## What can be improved
 - Use Enum for directions.
 - Unit test for commands analytics in main.js.
