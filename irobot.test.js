@@ -2,12 +2,11 @@ const { expect } = require('@jest/globals');
 const { it } = require('jest-circus');
 const { ContextConsumer } = require('react-is');
 const IRobot = require('./irobot.js');
-const iRobot = require('./irobot.js');
 
 describe('left()', () => {
   describe('When facing NORTH currently', () => {
     test("should face to the WEST after", () => {
-      const aIRobot = new iRobot(0, 0, 'NORTH');
+      const aIRobot = new IRobot(0, 0, 'NORTH');
       aIRobot.left();
       expect(aIRobot.direction).toEqual('WEST');
     });
@@ -15,7 +14,7 @@ describe('left()', () => {
 
   describe('When facing EAST currently', () => {
     test("should face to the NORTH after", () => {
-      const aIRobot = new iRobot(0, 0, 'EAST');
+      const aIRobot = new IRobot(0, 0, 'EAST');
       aIRobot.left();
       expect(aIRobot.direction).toEqual('NORTH');
     });
@@ -23,7 +22,7 @@ describe('left()', () => {
 
   describe('When facing SOUTH currently', () => {
     test("should face to the EAST after", () => {
-      const aIRobot = new iRobot(0, 0, 'SOUTH');
+      const aIRobot = new IRobot(0, 0, 'SOUTH');
       aIRobot.left();
       expect(aIRobot.direction).toEqual('EAST');
     });
@@ -31,7 +30,7 @@ describe('left()', () => {
 
   describe('When facing WEST currently', () => {
     test("should face to the SOUTH after", () => {
-      const aIRobot = new iRobot(0, 0, 'WEST');
+      const aIRobot = new IRobot(0, 0, 'WEST');
       aIRobot.left();
       expect(aIRobot.direction).toEqual('SOUTH');
     });
@@ -41,7 +40,7 @@ describe('left()', () => {
     test("should face to the NORTH after", () => {
       const x = Math.random(0, 5);
       const y = Math.random(0, 5);
-      const aIRobot = new iRobot(x, y, 'EAST');
+      const aIRobot = new IRobot(x, y, 'EAST');
       aIRobot.left();
       expect(aIRobot.direction).toEqual('NORTH');
     });
@@ -52,7 +51,7 @@ describe('left()', () => {
 describe('right()', () => {
   describe('When facing NORTH currently', () => {
     test("should face to the EAST after", () => {
-      const aIRobot = new iRobot(0, 0, 'NORTH');
+      const aIRobot = new IRobot(0, 0, 'NORTH');
       aIRobot.right();
       expect(aIRobot.direction).toEqual('EAST');
     });
@@ -60,7 +59,7 @@ describe('right()', () => {
 
   describe('When facing EAST currently', () => {
     test("should face to the SOUTH after", () => {
-      const aIRobot = new iRobot(0, 0, 'EAST');
+      const aIRobot = new IRobot(0, 0, 'EAST');
       aIRobot.right();
       expect(aIRobot.direction).toEqual('SOUTH');
     });
@@ -68,7 +67,7 @@ describe('right()', () => {
 
   describe('When facing SOUTH currently', () => {
     test("should face to the WEST after", () => {
-      const aIRobot = new iRobot(0, 0, 'SOUTH');
+      const aIRobot = new IRobot(0, 0, 'SOUTH');
       aIRobot.right();
       expect(aIRobot.direction).toEqual('WEST');
     });
@@ -76,7 +75,7 @@ describe('right()', () => {
 
   describe('When facing WEST currently', () => {
     test("should face to the NORTH after", () => {
-      const aIRobot = new iRobot(0, 0, 'WEST');
+      const aIRobot = new IRobot(0, 0, 'WEST');
       aIRobot.right();
       expect(aIRobot.direction).toEqual('NORTH');
     });
@@ -86,7 +85,7 @@ describe('right()', () => {
     test("should face to the SOUTH after", () => {
       const x = Math.random(0, 5);
       const y = Math.random(0, 5);
-      const aIRobot = new iRobot(x, y, 'EAST');
+      const aIRobot = new IRobot(x, y, 'EAST');
       aIRobot.right();
       expect(aIRobot.direction).toEqual('SOUTH');
     });
@@ -99,7 +98,7 @@ describe('move()', () => {
       [[0, 1], [1, 2], [2, 2], [3, 4], [4, 3]].forEach((position) => {
         describe(`When position is ${position[0]} , ${position[1]}`, () => {
           test(`new position should be ${position[0] + 1} , ${position[1]}`, () => {
-            const aIRobot = new iRobot(position[0], position[1], 'EAST');
+            const aIRobot = new IRobot(position[0], position[1], 'EAST');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0] + 1);
             expect(aIRobot.yPosition).toEqual(position[1]);
@@ -112,7 +111,7 @@ describe('move()', () => {
       [[5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 0]].forEach((position) => {
         describe(`When position is 5 , ${position[1]}`, () => {
           test(`new position should be 5 , ${position[1]}`, () => {
-            const aIRobot = new iRobot(5, position[1], 'EAST');
+            const aIRobot = new IRobot(5, position[1], 'EAST');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(5);
             expect(aIRobot.yPosition).toEqual(position[1]);
@@ -128,7 +127,7 @@ describe('move()', () => {
       [[1, 1], [1, 2], [2, 2], [3, 4], [4, 3]].forEach((position) => {
         describe(`When position is ${position[0]} , ${position[1]}`, () => {
           test(`new position should be ${position[0] - 1} , ${position[1]}`, () => {
-            const aIRobot = new iRobot(position[0], position[1], 'WEST');
+            const aIRobot = new IRobot(position[0], position[1], 'WEST');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0] - 1);
             expect(aIRobot.yPosition).toEqual(position[1]);
@@ -141,7 +140,7 @@ describe('move()', () => {
       [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 0]].forEach((position) => {
         describe(`When position is 0 , ${position[1]}`, () => {
           test(`new position should be 0 , ${position[1]}`, () => {
-            const aIRobot = new iRobot(0, position[1], 'WEST');
+            const aIRobot = new IRobot(0, position[1], 'WEST');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(0);
             expect(aIRobot.yPosition).toEqual(position[1]);
@@ -157,7 +156,7 @@ describe('move()', () => {
       [[1, 1], [1, 2], [2, 2], [3, 4], [4, 3]].forEach((position) => {
         describe(`When position is ${position[0]} , ${position[1]}`, () => {
           test(`new position should be ${position[0]} , ${position[1]} + 1`, () => {
-            const aIRobot = new iRobot(position[0], position[1], 'NORTH');
+            const aIRobot = new IRobot(position[0], position[1], 'NORTH');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0]);
             expect(aIRobot.yPosition).toEqual(position[1] + 1);
@@ -170,7 +169,7 @@ describe('move()', () => {
       [[1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [0, 5]].forEach((position) => {
         describe(`When position is position[0] , 5`, () => {
           test(`new position should be position[0] , 5`, () => {
-            const aIRobot = new iRobot(position[0], 5, 'NORTH');
+            const aIRobot = new IRobot(position[0], 5, 'NORTH');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0]);
             expect(aIRobot.yPosition).toEqual(5);
@@ -186,7 +185,7 @@ describe('move()', () => {
       [[1, 1], [1, 2], [2, 2], [3, 4], [4, 3]].forEach((position) => {
         describe(`When position is ${position[0]} , ${position[1]}`, () => {
           test(`new position should be ${position[0]} , ${position[1]} - 1`, () => {
-            const aIRobot = new iRobot(position[0], position[1], 'SOUTH');
+            const aIRobot = new IRobot(position[0], position[1], 'SOUTH');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0]);
             expect(aIRobot.yPosition).toEqual(position[1] - 1);
@@ -199,7 +198,7 @@ describe('move()', () => {
       [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [0, 0]].forEach((position) => {
         describe(`When position is ${position[0]} , 0`, () => {
           test(`new position should be ${position[0]} , 0`, () => {
-            const aIRobot = new iRobot(position[0], 0, 'SOUTH');
+            const aIRobot = new IRobot(position[0], 0, 'SOUTH');
             aIRobot.move();
             expect(aIRobot.xPosition).toEqual(position[0]);
             expect(aIRobot.yPosition).toEqual(0);
@@ -219,7 +218,7 @@ describe('status()', () => {
 
     describe(`When status is ${x} , ${y}, ${direction}`, () => {
       test(`should report the correct status of the robot`, () => {
-        const aIRobot = new iRobot(x, y, direction);
+        const aIRobot = new IRobot(x, y, direction);
         expect(aIRobot.status()).toEqual(`${x}, ${y}, ${direction}`);
       });
     });
@@ -235,7 +234,7 @@ describe('place()', () => {
 
       describe(`on ${x} , ${y}, ${direction}`, () => {
         test(`should place the robot on the right position`, () => {
-          const aIRobot = new iRobot(0, 0, 'EAST');
+          const aIRobot = new IRobot(0, 0, 'EAST');
 
           aIRobot.place(x, y, direction);
 
@@ -251,7 +250,7 @@ describe('place()', () => {
     let aIRobot;
 
     beforeEach(() => {
-      aIRobot = new iRobot(1, 2, 'NORTH');
+      aIRobot = new IRobot(1, 2, 'NORTH');
     });
 
     test('should not change the position of the robot', () => {
@@ -274,7 +273,7 @@ describe('place()', () => {
     let aIRobot;
 
     beforeEach(() => {
-      aIRobot = new iRobot(1, 2, 'NORTH');
+      aIRobot = new IRobot(1, 2, 'NORTH');
     });
 
     test('should not change the direction of the robot', () => {
