@@ -1,25 +1,29 @@
 ## How to start
-In the project directory, you need to run:
-### `npm install`
+```
+npm install
+```
 
-In terminal to run it:
-### `node main.js`
-input command list below:
-### `place 1,2,north`
-### `move`
-### `left`
-### `right`
-### `report`
+## Available commands
+- **PLACE X,Y,F** - will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST
+- **MOVE** - will move the toy robot one unit forward in the direction it is currently facing
+- **LEFT** - will rotate the robot anti-clockwise 90 degrees in the specified direction without changing the position of the robot
+- **RIGHT** - will rotate the robot clockwise 90 degrees in the specified direction without changing the position of the robot
+- **REPORT** - will announce the X,Y and orientation of the robot
+- **EXIT** - will exit the programme
 
-for testing , you need to run:
-### `npm run test`
+
+## How to run tests:
+```
+npm run test
+```
 
 ## What can be improved
-- Enum for directions
-- Unit test for inputting commands in main.js
-- Integration test between main and irobot
+- Use Enum for directions.
+- Unit test for commands analytics in main.js.
+- Could use regex for analysing commands.
+- Integration test between main.js and irobot.js.
 
-## Requirement
+## Requirements
 The application is a simulation of a toy robot moving on a square table top, of dimensions 5 units x 5 units. There are no other obstructions on the table surface. The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
 Create a ​console application​ that can read in commands of the following form - PLACE X,Y,F
 MOVE LEFT
